@@ -1,0 +1,108 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: sans-serif;
+}
+
+#sidebar {
+    position: fixed;
+    width: 200px;
+    height: 100%;
+    background: #151719;
+    left: -200px;
+    transition: 400ms all;
+}
+
+#sidebar.active {
+    left: 0px;
+}
+
+#sidebar ul {
+    padding: 0 30px;
+}
+
+#sidebar ul li {
+    color: rgba(230,230,230,1);
+    list-style: none;
+    padding: 15px 10px;
+    border-bottom: 1px solid rgba(100,100,100, 0.4);
+    display: block;
+    text-align: center;
+}
+
+#sidebar ul li a {
+    color: rgba(230,230,230,1);
+    text-decoration: none;
+}
+
+#sidebar ul li:nth-child(2) {
+    border-top: 1px solid rgba(100,100,100,0.4)
+}
+
+#sidebar .toggle-btn {
+    border-radius: 10px;
+    width: 68px;
+    height: 68px;
+    background-color: #151719;
+}
+
+#sidebar .toggle-btn i {
+    color: #fff;
+    font-size: 35px;
+    padding: 16px 19px 19px;
+}
+
+.opcoes {
+    position: absolute;
+    left: 230px;
+    top: 20px;
+    display: flex;
+}
+
+.opcoes form {
+    background-color: #0066CC;
+    border-radius: 10px;
+    padding: 18px;
+    margin-left: 20px;
+    position: relative;
+    height: 68px;
+}
+
+.opcoes form input {
+    padding: 8px;
+    border-radius: 10px;
+    border: 0;
+    font-weight: bold;
+    color: #151719;
+    padding-left: 35px;
+}
+
+.opcoes form input::-webkit-input-placeholder {
+    color: rgba(0,0,0,0.3);
+}
+
+.opcoes form i {
+    position: absolute;
+    top: 20px;
+    left: 23px;
+    font-size: x-large;
+}
+
+#sidebar .brand-logo img{
+    margin: 20px auto 20px;
+    width: 80px;
+    display: block;
+
+}
+
+#sidebar .footer {
+    position: absolute;
+    bottom: 0;
+    font-size: 12px;
+    left: 35%;
+}
