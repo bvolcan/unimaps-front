@@ -106,3 +106,10 @@
     font-size: 12px;
     left: 35%;
 }
+
+.zoomHolder {
+    width: 100%;
+    height: auto;
+    position: relative;
+    overflow: hidden;
+}

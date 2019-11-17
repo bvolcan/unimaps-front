@@ -49,10 +49,14 @@
         </div>
 
         <div class="mapa">
-                <img src="images/mapa.png">
-        </div>
+            <img src="images/mapa.png" style="width: 100%; height: 99.6vh;" >
+    </div>
 
-        
+    <script src="wheelzoom.js"></script>
+    <script>
+            images = wheelzoom(document.querySelectorAll('img'), {zoom: 0.1, maxZoom: 10});
+    </script>
+    
     </body>
 
 
