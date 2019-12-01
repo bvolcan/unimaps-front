@@ -6,10 +6,10 @@
 
 // create CustomEvent to override window.Event in unsupported browsers
 (function () {
-	function CustomEvent ( event, params ) {
+	function CustomEvent(event, params) {
 		params = params || { bubbles: false, cancelable: false, detail: undefined };
-		var evt = document.createEvent( 'CustomEvent' );
-		evt.initCustomEvent( event, params.bubbles, params.cancelable, params.detail );
+		var evt = document.createEvent('CustomEvent');
+		evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
 		return evt;
 	}
 
@@ -18,7 +18,7 @@
 })();
 
 // create cross browser triggerEvent function
-window.triggerEvent = function(target, eventName, params) {
+window.triggerEvent = function (target, eventName, params) {
 	if (params) {
 		var e = new CustomEvent(eventName, {
 			'detail': params
@@ -34,7 +34,7 @@ window.triggerEvent = function(target, eventName, params) {
 	return target.dispatchEvent(e, params);
 };
 
-window.wheelzoom = (function(){
+window.wheelzoom = (function () {
 	var defaults = {
 		zoom: 0.10,
 		maxZoom: -1
@@ -42,7 +42,7 @@ window.wheelzoom = (function(){
 
 	var canvas = document.createElement('canvas');
 
-	var main = function(img, options){
+	var main = function (img, options) {
 		if (!img || !img.nodeName || img.nodeName !== 'IMG') { return; }
 
 		var settings = {};
@@ -58,7 +58,7 @@ window.wheelzoom = (function(){
 		var initBgPosY;
 
 		function setSrcToBackground(img) {
-			img.style.backgroundImage = 'url("'+img.src+'")';
+			img.style.backgroundImage = 'url("' + img.src + '")';
 			img.style.backgroundRepeat = 'no-repeat';
 			canvas.width = img.naturalWidth;
 			canvas.height = img.naturalHeight;
@@ -79,8 +79,8 @@ window.wheelzoom = (function(){
 				bgPosY = height - bgHeight;
 			}
 
-			img.style.backgroundSize = bgWidth+'px '+bgHeight+'px';
-			img.style.backgroundPosition = bgPosX+'px '+bgPosY+'px';
+			img.style.backgroundSize = bgWidth + 'px ' + bgHeight + 'px';
+			img.style.backgroundPosition = bgPosX + 'px ' + bgPosY + 'px';
 		}
 
 		function reset() {
@@ -90,7 +90,7 @@ window.wheelzoom = (function(){
 			updateBgStyle();
 		}
 
-		img.doZoomIn = function(propagate) {
+		img.doZoomIn = function (propagate) {
 			if (typeof propagate === 'undefined') {
 				propagate = false;
 			}
@@ -98,7 +98,7 @@ window.wheelzoom = (function(){
 			doZoom(-100, propagate);
 		}
 
-		img.doZoomOut = function(propagate) {
+		img.doZoomOut = function (propagate) {
 			if (typeof propagate === 'undefined') {
 				propagate = false;
 			}
@@ -106,31 +106,31 @@ window.wheelzoom = (function(){
 			doZoom(100, propagate);
 		}
 
-		function doZoom (deltaY, propagate) {
+		function doZoom(deltaY, propagate) {
 			if (typeof propagate === 'undefined') {
 				propagate = false;
 			}
 
 			// zoom always at the center of the image
-			var offsetX = img.width/2;
-			var offsetY = img.height/2;
+			var offsetX = img.width / 2;
+			var offsetY = img.height / 2;
 
 			// Record the offset between the bg edge and the center of the image:
 			var bgCenterX = offsetX - bgPosX;
 			var bgCenterY = offsetY - bgPosY;
 			// Use the previous offset to get the percent offset between the bg edge and the center of the image:
-			var bgRatioX = bgCenterX/bgWidth;
-			var bgRatioY = bgCenterY/bgHeight;
+			var bgRatioX = bgCenterX / bgWidth;
+			var bgRatioY = bgCenterY / bgHeight;
 
 			// Update the bg size:
 			if (deltaY < 0) {
-				if (settings.maxZoom == -1 || (bgWidth + bgWidth*settings.zoom) / width <= settings.maxZoom) {
-					bgWidth += bgWidth*settings.zoom;
-					bgHeight += bgHeight*settings.zoom;
+				if (settings.maxZoom == -1 || (bgWidth + bgWidth * settings.zoom) / width <= settings.maxZoom) {
+					bgWidth += bgWidth * settings.zoom;
+					bgHeight += bgHeight * settings.zoom;
 				}
 			} else {
-				bgWidth -= bgWidth*settings.zoom;
-				bgHeight -= bgHeight*settings.zoom;
+				bgWidth -= bgWidth * settings.zoom;
+				bgHeight -= bgHeight * settings.zoom;
 			}
 
 			// Take the percent offset and apply it to the new size:
@@ -140,18 +140,18 @@ window.wheelzoom = (function(){
 			if (propagate) {
 				if (deltaY < 0) {
 					// setTimeout to handle lot of events fired
-					setTimeout(function() {
+					setTimeout(function () {
 						triggerEvent(img, 'wheelzoom.in', {
-							zoom: bgWidth/width,
+							zoom: bgWidth / width,
 							bgPosX: bgPosX,
 							bgPosY: bgPosY
 						});
 					}, 10);
 				} else {
 					// setTimeout to handle lot of events fired
-					setTimeout(function() {
+					setTimeout(function () {
 						triggerEvent(img, 'wheelzoom.out', {
-							zoom: bgWidth/width,
+							zoom: bgWidth / width,
 							bgPosX: bgPosX,
 							bgPosY: bgPosY
 						});
@@ -245,7 +245,7 @@ window.wheelzoom = (function(){
 
 			setSrcToBackground(img);
 
-			img.style.backgroundSize =  width+'px '+height+'px';
+			img.style.backgroundSize = width + 'px ' + height + 'px';
 			img.style.backgroundPosition = '0 0';
 
 			img.addEventListener('wheelzoom.reset', reset);
@@ -273,11 +273,11 @@ window.wheelzoom = (function(){
 
 		options = options || {};
 
-		Object.keys(defaults).forEach(function(key){
+		Object.keys(defaults).forEach(function (key) {
 			settings[key] = typeof options[key] !== 'undefined' ? options[key] : defaults[key];
 		});
 
-		var t = setInterval(function(){
+		var t = setInterval(function () {
 			if (img.complete) {
 				load();
 			}
@@ -288,13 +288,13 @@ window.wheelzoom = (function(){
 
 	// Do nothing in IE8
 	if (typeof window.getComputedStyle !== 'function') {
-		return function(elements) {
+		return function (elements) {
 			return elements;
 		};
 	} else {
-		return function(elements, options) {
+		return function (elements, options) {
 			if (elements && elements.length) {
-				for (var i=0;i<elements.length;i++) {
+				for (var i = 0; i < elements.length; i++) {
 					main(elements[i], options);
 				}
 			} else if (elements && elements.nodeName) {

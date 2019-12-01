@@ -122,3 +122,8 @@
 .Niveis {
     margin-left: 20px;
 }
+
+.Niveis a {
+    color: #151719;
+    text-decoration: none;
+}
