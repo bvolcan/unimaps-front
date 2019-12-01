@@ -113,3 +113,12 @@
     position: relative;
     overflow: hidden;
 }
+
+.Niveis .fa {
+    font-size: 34px;
+    margin-top: 1px;
+}
+
+.Niveis {
+    margin-left: 20px;
+}
