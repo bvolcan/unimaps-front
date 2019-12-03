@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import { Menu, Dropdown, Icon } from "antd";
+
 import {
   BrowserRouter as Router,
   Route,
@@ -14,8 +16,8 @@ class MapScreen extends Component {
   }
   render() {
     let andar = this.props.match.params.id;
-    const max=4, min=1;
-    if(this.e){
+    const max = 4, min = 1;
+    if (this.e) {
       window.triggerEvent(this.e, 'wheelzoom.destroy');
     }
     window.wheelzoom(this.e, { zoom: 0.1, maxZoom: 10 })
@@ -31,14 +33,24 @@ class MapScreen extends Component {
 
           <form action="">
             <i className="fa fa-search"></i>
-            <input type="text" placeholder="Buscar" />
+            <div className="dropdown">
+              <button className="dropbtn">
+                Andares
+              </button>
+              <div className="dropdown-content">
+                <a href="/andar/1">Primeiro andar</a>
+                <a href="/andar/2">Segundo andar</a>
+                <a href="/andar/3">Terceiro andar</a>
+                <a href="/andar/4">Quarto andar</a>
+              </div>
+            </div>
           </form>
 
           <div className="Niveis">
-            {andar==max&&<i className="fa fa-arrow-circle-up" ></i>||<Link to={"/andar/" + (parseInt(andar)+1)}>
+            {andar == max && <i className="fa fa-arrow-circle-up" ></i> || <Link to={"/andar/" + (parseInt(andar) + 1)}>
               <i className="fa fa-arrow-circle-up" ></i>
             </Link>}
-            {andar==min&&<i className="fa fa-arrow-circle-down" ></i>||<Link to={"/andar/" + (andar-1)}>
+            {andar == min && <i className="fa fa-arrow-circle-down" ></i> || <Link to={"/andar/" + (andar - 1)}>
               <i className="fa fa-arrow-circle-down" ></i>
             </Link>}
           </div>
@@ -57,8 +69,15 @@ class MapScreen extends Component {
       </div>
 
       <div className="mapa">
-        <img src={"/images/andar-"+andar+".png"} ref={(e) => this.e = e} style={{ width: "100%", height: "99.6vh" }} />
+        <img src={"/images/andar-" + andar + ".png"} ref={(e) => this.e = e} style={{ width: "100%", height: "99.6vh" }} />
       </div>
+
+      <div className="BottomBar">
+        <div className="BottomBar-content">
+          <li>Informações do Andar:</li>
+        </div>
+      </div>
+
     </div>)
   }
   state = { menu: false, andar: 1 }
@@ -77,12 +96,14 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <Route path="/" exact> <Redirect from="/" to="/andar/1"/> </Route>
+        <Route path="/" exact> <Redirect from="/" to="/andar/1" /> </Route>
         <Route path="/andar/:id" component={MapScreen} />
       </Router>
 
     );
   }
 }
+
+
 
 export default App;
