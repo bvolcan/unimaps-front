@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-
 import { Menu, Dropdown, Icon } from "antd";
-
+import FloorList from "./FloorList";
 import {
   BrowserRouter as Router,
   Route,
@@ -75,6 +74,7 @@ class MapScreen extends Component {
       <div className="BottomBar">
         <div className="BottomBar-content">
           <li>Informações do Andar:</li>
+          <FloorList />
         </div>
       </div>
 
