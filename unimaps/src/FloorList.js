@@ -7,7 +7,7 @@
      };
 
 componentDidMount(){
-    axios.get(`https://jsonplaceholder.typicode.com/users`).then(res => {
+    axios.get(`https://unimaps-back.herokuapp.com/floor`).then(res => {
         console.log(res);
         this.setState({floors: res.data});
     });
@@ -16,7 +16,7 @@ componentDidMount(){
 render() {
     return (
         <b>
-            {this.state.floors.map(floor => <b key={floor.id}>{floor.name}</b>)}
+            {this.state.floors.map(floor => <b key={floor.building_id}>{floor.building_id}</b>)}
         </b>
     )
 }

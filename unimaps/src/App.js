@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Menu, Dropdown, Icon } from "antd";
 import FloorList from "./FloorList";
 import {
   BrowserRouter as Router,
@@ -46,10 +45,10 @@ class MapScreen extends Component {
           </form>
 
           <div className="Niveis">
-            {andar == max && <i className="fa fa-arrow-circle-up" ></i> || <Link to={"/andar/" + (parseInt(andar) + 1)}>
+            {andar === max && <i className="fa fa-arrow-circle-up" ></i> || <Link to={"/andar/" + (parseInt(andar) + 1)}>
               <i className="fa fa-arrow-circle-up" ></i>
             </Link>}
-            {andar == min && <i className="fa fa-arrow-circle-down" ></i> || <Link to={"/andar/" + (andar - 1)}>
+            {andar === min && <i className="fa fa-arrow-circle-down" ></i> || <Link to={"/andar/" + (andar - 1)}>
               <i className="fa fa-arrow-circle-down" ></i>
             </Link>}
           </div>
