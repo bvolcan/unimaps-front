@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
   Route,
-  Link
+  Link,
+  Redirect
 } from "react-router-dom";
 
 
@@ -76,7 +77,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <Route path="/" exact> <Link to="/andar/1"> 2345meia78 </Link> </Route>
+        <Route path="/" exact> <Redirect from="/" to="/andar/1"/> </Route>
         <Route path="/andar/:id" component={MapScreen} />
       </Router>
 
