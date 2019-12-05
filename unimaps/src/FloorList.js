@@ -9,14 +9,19 @@
 componentDidMount(){
     axios.get(`https://unimaps-back.herokuapp.com/floor`).then(res => {
         console.log(res);
-        this.setState({floors: res.data});
+        res.data.map(andar=>{
+            if(andar.number==this.props.andar){
+                this.setState({floors: andar});
+            }
+        });
     });
 }
 
 render() {
+    let floor=this.state.floors;
     return (
         <b>
-            {this.state.floors.map(floor => <b key={floor.building_id}>{floor.building_id}</b>)}
+            <b key={floor.building_id}>Numero de salas: {floor.room_quantity}</b>
         </b>
     )
 }

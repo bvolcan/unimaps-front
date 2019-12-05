@@ -33,24 +33,26 @@ class MapScreen extends Component {
             <i className="fa fa-search"></i>
             <div className="dropdown">
               <button className="dropbtn">
-                Andares
+                Anglo
               </button>
               <div className="dropdown-content">
-                <a href="/andar/1">Primeiro andar</a>
-                <a href="/andar/2">Segundo andar</a>
-                <a href="/andar/3">Terceiro andar</a>
-                <a href="/andar/4">Quarto andar</a>
+                <div className="submenu"><button className="dropbtn" >Anglo</button><div className="dropdown-content"><a href="/andar/1">Primeiro andar</a><a href="/andar/2">Segundo andar</a><a href="/andar/3">Terceiro andar</a><a href="/andar/4">Quarto andar</a></div></div>
+                <div className="submenu"><button className="dropbtn" >Capao</button><div className="dropdown-content"><a href="/andar/1">Primeiro andar</a><a href="/andar/2">Segundo andar</a><a href="/andar/3">Terceiro andar</a><a href="/andar/4">Quarto andar</a></div></div>
+                <div className="submenu"><button className="dropbtn" >ICH</button><div className="dropdown-content"><a href="/andar/1">Primeiro andar</a><a href="/andar/2">Segundo andar</a><a href="/andar/3">Terceiro andar</a><a href="/andar/4">Quarto andar</a></div></div>
+                <div className="submenu"><button className="dropbtn" >Cotada</button><div className="dropdown-content"><a href="/andar/1">Primeiro andar</a><a href="/andar/2">Segundo andar</a><a href="/andar/3">Terceiro andar</a><a href="/andar/4">Quarto andar</a></div></div>
+                <div className="submenu"><button className="dropbtn" >Direito</button><div className="dropdown-content"><a href="/andar/1">Primeiro andar</a><a href="/andar/2">Segundo andar</a><a href="/andar/3">Terceiro andar</a><a href="/andar/4">Quarto andar</a></div></div> 
+                <div className="submenu"><button className="dropbtn" >Leiga</button><div className="dropdown-content"><a href="/andar/1">Primeiro andar</a><a href="/andar/2">Segundo andar</a><a href="/andar/3">Terceiro andar</a><a href="/andar/4">Quarto andar</a></div></div>        
               </div>
             </div>
           </form>
 
           <div className="Niveis">
-            {andar == max && <i className="fa fa-arrow-circle-up" ></i> || <Link to={"/andar/" + (parseInt(andar) + 1)}>
+            {andar == max && <i className="fa fa-arrow-circle-up" ></i> || <a href={"/andar/" + (parseInt(andar) + 1)}>
               <i className="fa fa-arrow-circle-up" ></i>
-            </Link>}
-            {andar == min && <i className="fa fa-arrow-circle-down" ></i> || <Link to={"/andar/" + (andar - 1)}>
+            </a>}
+            {andar == min && <i className="fa fa-arrow-circle-down" ></i> || <a href={"/andar/" + (andar - 1)}>
               <i className="fa fa-arrow-circle-down" ></i>
-            </Link>}
+            </a>}
           </div>
         </div>
 
@@ -70,21 +72,25 @@ class MapScreen extends Component {
         <img src={"/images/andar-" + andar + ".png"} ref={(e) => this.e = e} style={{ width: "100%", height: "99.6vh" }} />
       </div>
 
-      <div className="BottomBar">
+      <div className={"BottomBar" + (this.state.bottom && " active"||"")}>
+        <button onClick={()=>this.toggleBottom()}><i className="fa fa-bars"></i></button>
         <div className="BottomBar-content">
           <li>Informações do Andar:</li>
-          <FloorList />
+          <FloorList andar={andar}/>
         </div>
       </div>
 
     </div>)
   }
-  state = { menu: false, andar: 1 }
+  state = { menu: false, andar:1 , bottom: false }
 
   toggleSidebar() {
-    //document.getElementById("sidebar").classList.toggle('active')
     this.setState({ menu: !this.state.menu })
   }
+  toggleBottom() {
+    this.setState({ bottom: !this.state.bottom })
+  }
+
 }
 
 class App extends Component {
