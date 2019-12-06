@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FloorList from "./FloorList";
+import Modal from "react-modal";
 import {
   BrowserRouter as Router,
   Route,
@@ -8,11 +9,13 @@ import {
 } from "react-router-dom";
 
 
+
 class MapScreen extends Component {
   componentDidMount() {
     window.wheelzoom(this.e, { zoom: 0.1, maxZoom: 10 })
   }
   render() {
+    let custom={content:{top:"50%", left:"50%", right:"auto", bottom:"auto", marginRight: "-50%", transform: 'translate(-50%, -50%)'}}
     let andar = this.props.match.params.id;
     const max = 4, min = 1;
     if (this.e) {
@@ -20,6 +23,27 @@ class MapScreen extends Component {
     }
     window.wheelzoom(this.e, { zoom: 0.1, maxZoom: 10 })
     return (<div>
+      <Modal isOpen={this.state.open} onRequestClose={() => this.setState({ open: false })} style={custom}>
+        <p>
+          Sobre: Aplicativo web feito por trainees da Hut8.
+        </p>
+      </Modal>
+      <Modal isOpen={this.state.open2} onRequestClose={() => this.setState({ open2: false })} style={custom}>
+          
+          <form>
+          <span>
+          Contato:
+          </span>
+          <input></input>
+          <br></br>
+          <br></br>
+          <span>
+          Mensagem:
+          </span>
+          <input></input>
+          </form>
+          
+      </Modal>
       <div id="sidebar" className={this.state.menu && "active"}>
 
 
@@ -40,8 +64,8 @@ class MapScreen extends Component {
                 <div className="submenu"><button className="dropbtn" >Capao</button><div className="dropdown-content"><a href="/andar/1">Primeiro andar</a><a href="/andar/2">Segundo andar</a><a href="/andar/3">Terceiro andar</a><a href="/andar/4">Quarto andar</a></div></div>
                 <div className="submenu"><button className="dropbtn" >ICH</button><div className="dropdown-content"><a href="/andar/1">Primeiro andar</a><a href="/andar/2">Segundo andar</a><a href="/andar/3">Terceiro andar</a><a href="/andar/4">Quarto andar</a></div></div>
                 <div className="submenu"><button className="dropbtn" >Cotada</button><div className="dropdown-content"><a href="/andar/1">Primeiro andar</a><a href="/andar/2">Segundo andar</a><a href="/andar/3">Terceiro andar</a><a href="/andar/4">Quarto andar</a></div></div>
-                <div className="submenu"><button className="dropbtn" >Direito</button><div className="dropdown-content"><a href="/andar/1">Primeiro andar</a><a href="/andar/2">Segundo andar</a><a href="/andar/3">Terceiro andar</a><a href="/andar/4">Quarto andar</a></div></div> 
-                <div className="submenu"><button className="dropbtn" >Leiga</button><div className="dropdown-content"><a href="/andar/1">Primeiro andar</a><a href="/andar/2">Segundo andar</a><a href="/andar/3">Terceiro andar</a><a href="/andar/4">Quarto andar</a></div></div>        
+                <div className="submenu"><button className="dropbtn" >Direito</button><div className="dropdown-content"><a href="/andar/1">Primeiro andar</a><a href="/andar/2">Segundo andar</a><a href="/andar/3">Terceiro andar</a><a href="/andar/4">Quarto andar</a></div></div>
+                <div className="submenu"><button className="dropbtn" >Leiga</button><div className="dropdown-content"><a href="/andar/1">Primeiro andar</a><a href="/andar/2">Segundo andar</a><a href="/andar/3">Terceiro andar</a><a href="/andar/4">Quarto andar</a></div></div>
               </div>
             </div>
           </form>
@@ -62,8 +86,8 @@ class MapScreen extends Component {
             <img src="/images/Logo.png" />
           </div>
           <li className="menu"><a href="">Home</a></li>
-          <li className="menu"><a href="">Sobre</a></li>
-          <li className="menu"><a href="">Contato</a></li>
+          <li className="menu"><a onClick={()=>this.setState({ open: true })}>Sobre</a></li>
+          <li className="menu"><a onClick={()=>this.setState({ open2: true })}>Contato</a></li>
           <li className="footer">&copy;2019</li>
         </ul>
       </div>
@@ -72,17 +96,17 @@ class MapScreen extends Component {
         <img src={"/images/andar-" + andar + ".png"} ref={(e) => this.e = e} style={{ width: "100%", height: "99.6vh" }} />
       </div>
 
-      <div className={"BottomBar" + (this.state.bottom && " active"||"")}>
-        <button onClick={()=>this.toggleBottom()}><i className="fa fa-bars"></i></button>
+      <div className={"BottomBar" + (this.state.bottom && " active" || "")}>
+        <button onClick={() => this.toggleBottom()}><i className="fa fa-bars"></i></button>
         <div className="BottomBar-content">
           <li>Informações do Andar:</li>
-          <FloorList andar={andar}/>
+          <FloorList andar={andar} />
         </div>
       </div>
 
     </div>)
   }
-  state = { menu: false, andar:1 , bottom: false }
+  state = { menu: false, andar: 1, bottom: false }
 
   toggleSidebar() {
     this.setState({ menu: !this.state.menu })
@@ -92,6 +116,8 @@ class MapScreen extends Component {
   }
 
 }
+
+
 
 class App extends Component {
 
